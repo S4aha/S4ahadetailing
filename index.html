@@ -1,108 +1,60 @@
 <!DOCTYPE html>
 <html lang="bs">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S4aha Detailing</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
+    @keyframes backgroundGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     body {
-      background: linear-gradient(to right, #1c1c1c, #2e2e2e);
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+      background-size: 600% 600%;
+      animation: backgroundGlow 15s ease infinite;
+      color: white;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      padding: 40px 20px;
-      overflow-x: hidden;
     }
 
     h1 {
-      font-size: 3em;
-      margin-bottom: 30px;
-      color: #f5f5f5;
-      animation: fadeIn 1s ease-in;
+      font-size: 2.5em;
+      margin-bottom: 1em;
     }
 
-    .options button {
-      background-color: #444;
-      color: #fff;
-      padding: 15px 30px;
-      margin: 15px 0;
+    .option-btn {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #00bcd4;
+      color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 1.3em;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+      font-size: 1.1em;
+      transition: transform 0.3s, background-color 0.3s;
     }
 
-    .options button:hover {
-      background-color: #666;
+    .option-btn:hover {
+      background-color: #00acc1;
       transform: scale(1.05);
     }
 
-    .packages, .info-tab {
-      display: none;
-      margin-top: 30px;
-      animation: fadeIn 0.8s ease;
-    }
-
     .package {
-      background-color: #333;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
       padding: 20px;
-      margin: 15px auto;
-      border-radius: 12px;
+      margin: 20px auto;
       width: 90%;
-      max-width: 500px;
-      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .package:hover {
-      transform: translateY(-5px);
-    }
-
-    .form-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #222;
-      padding: 25px;
-      border-radius: 12px;
-      z-index: 999;
-      box-shadow: 0 0 15px rgba(0,255,255,0.3);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: none;
-    }
-
-    .stickers {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      gap: 10px;
-      animation: sparkle 2s infinite;
-    }
-
-    .stickers i {
-      font-size: 1.8em;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      animation: fadeIn 1s ease;
     }
 
     @keyframes fadeIn {
@@ -110,89 +62,109 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes sparkle {
-      0% { opacity: 0.8; }
-      50% { opacity: 1; }
-      100% { opacity: 0.8; }
+    .icon-bar {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+
+    .icon-bar img {
+      display: block;
+      margin: 10px 0;
+      width: 40px;
+      filter: drop-shadow(0 0 10px cyan);
     }
   </style>
 </head>
-
 <body>
   <h1>S4aha Detailing</h1>
 
-  <div class="options">
-    <button onclick="showSection('packages')">Paketi</button>
-    <button onclick="showSection('info')">Informacije</button>
-    <button onclick="window.location.href='about:blank'">Izlaz</button>
-  </div>
+  <button class="option-btn" onclick="showSection('packages')">Paketi</button>
+  <button class="option-btn" onclick="showSection('info')">Informacije</button>
+  <button class="option-btn" onclick="exitTab()">Izlaz</button>
 
-  <div class="packages" id="packages">
+  <div id="packages" style="display:none;">
     <div class="package">
       <h2>Poliranje farova - 50 KM</h2>
-      <label><input type="checkbox" id="keramicka" onchange="updateFaroviCijena()"> Keramička zaštita (+10 KM)</label>
-      <p id="cijenaFarova">Cijena: 50 KM</p>
-      <button onclick="openForm('Farovi')">Rezerviši</button>
+      <label>
+        <input type="checkbox" id="keramicka" onchange="toggleKeramicka()"> Keramička zaštita (+10 KM)
+      </label>
+      <p id="farovi-cijena">Cijena: 50 KM</p>
+      <button class="option-btn" onclick="openForm('Poliranje farova')">Rezerviši</button>
     </div>
+
     <div class="package">
-      <h2>Light Paket - Jednoslojno poliranje - 180 KM</h2>
-      <button onclick="openForm('Light Paket')">Rezerviši</button>
+      <h2>Light Paket</h2>
+      <p>Jednoslojno poliranje automobila - 180 KM</p>
+      <button class="option-btn" onclick="openForm('Light paket')">Rezerviši</button>
     </div>
+
     <div class="package">
-      <h2>Normal Paket - Dvoslojno + usisavanje - 250 KM</h2>
-      <button onclick="openForm('Normal Paket')">Rezerviši</button>
+      <h2>Normal Paket</h2>
+      <p>Dvoslojno poliranje i usisavanje - 250 KM</p>
+      <button class="option-btn" onclick="openForm('Normal paket')">Rezerviši</button>
     </div>
+
     <div class="package">
-      <h2>Full Paket - Troslojno + detailing - 320 KM</h2>
-      <button onclick="openForm('Full Paket')">Rezerviši</button>
+      <h2>Full Paket</h2>
+      <p>Troslojno poliranje i full detailing - 320 KM</p>
+      <button class="option-btn" onclick="openForm('Full paket')">Rezerviši</button>
     </div>
   </div>
 
-  <div class="info-tab" id="info">
-    <h2>Informacije</h2>
-    <p>Ime i Prezime: Adin Šahinović</p>
-    <p>Broj Telefona: 061374815</p>
-    <p>Adresa: Konjic 88400, Radešine.bb</p>
-    <a href="viber://chat?number=+38761374815"><i class="fab fa-viber"></i> Viber</a>
-    <br>
-    <a href="https://wa.me/38761374815"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <div id="info" style="display:none;">
+    <div class="package">
+      <h2>Kontakt informacije</h2>
+      <p>Adin Šahinović</p>
+      <p>Broj: 061 374 815</p>
+      <p>Adresa: Konjic, Radešine.bb 88400</p>
+      <a href="viber://chat?number=+38761374815"><img src="https://img.icons8.com/color/48/000000/viber.png"/></a>
+      <a href="https://wa.me/38761374815"><img src="https://img.icons8.com/color/48/000000/whatsapp.png"/></a>
+    </div>
   </div>
 
-  <div class="form-popup" id="form">
-    <form action="https://formsubmit.co/sahinovicasin@gmail.com" method="POST">
-      <input type="hidden" name="_subject" id="form-subject" value="Rezervacija">
-      <input type="text" name="Ime i Prezime" placeholder="Ime i Prezime" required>
-      <input type="tel" name="Broj Telefona" placeholder="Broj Telefona" required>
-      <input type="text" name="Adresa" placeholder="Adresa" required>
-      <textarea name="Pitanje" placeholder="Dodatna pitanja..."></textarea>
-      <button type="submit">Rezerviši</button>
+  <div id="form-popup" style="display:none;">
+    <form action="https://formsubmit.co/Sahinovicasin@gmail.com" method="POST" class="package">
+      <input type="hidden" name="_next" value="https://s4aha.github.io/S4ahadetailing/thankyou.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" id="selectedPackage" name="Paket">
+      <input type="text" name="Ime i Prezime" placeholder="Ime i Prezime" required><br><br>
+      <input type="tel" name="Telefon" placeholder="Broj telefona" required><br><br>
+      <input type="text" name="Adresa" placeholder="Adresa"><br><br>
+      <textarea name="Poruka" placeholder="Pitanja ili napomena..."></textarea><br><br>
+      <button class="option-btn" type="submit">Rezerviši</button>
     </form>
   </div>
 
-  <div class="stickers">
-    <i class="fas fa-car"></i>
-    <i class="fas fa-broom"></i>
-    <i class="fas fa-spray-can"></i>
+  <div class="icon-bar">
+    <img src="https://img.icons8.com/fluency/48/car-cleaning.png" alt="Polirka">
+    <img src="https://img.icons8.com/fluency/48/vacuum-cleaner.png" alt="Usisivač">
+    <img src="https://img.icons8.com/fluency/48/spray.png" alt="Sprej">
   </div>
 
   <script>
     function showSection(id) {
       document.getElementById('packages').style.display = 'none';
       document.getElementById('info').style.display = 'none';
+      document.getElementById('form-popup').style.display = 'none';
       document.getElementById(id).style.display = 'block';
     }
 
-    function updateFaroviCijena() {
-      const keramicka = document.getElementById('keramicka').checked;
-      const cijena = keramicka ? '60 KM' : '50 KM';
-      document.getElementById('cijenaFarova').innerText = 'Cijena: ' + cijena;
+    function openForm(paket) {
+      document.getElementById('form-popup').style.display = 'block';
+      document.getElementById('selectedPackage').value = paket;
     }
 
-    function openForm(paket) {
-      document.getElementById('form').style.display = 'block';
-      document.getElementById('form-subject').value = 'Rezervacija - ' + paket;
+    function exitTab() {
+      window.location.href = 'https://www.google.com';
+    }
+
+    function toggleKeramicka() {
+      const checkbox = document.getElementById('keramicka');
+      const cijena = document.getElementById('farovi-cijena');
+      cijena.innerText = checkbox.checked ? "Cijena: 60 KM" : "Cijena: 50 KM";
     }
   </script>
 </body>
-
 </html>
