@@ -8,34 +8,56 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #eee;
+      background-color: #0f0f0f;
+      color: #fff;
       padding: 20px;
     }
     header {
       text-align: center;
-      padding-bottom: 20px;
+      margin-bottom: 40px;
     }
     h1 {
       font-size: 36px;
       color: #0af;
     }
-    .section {
+    .packages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
       background-color: #1a1a1a;
       border-radius: 10px;
       padding: 20px;
-      margin-bottom: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px #0af4;
     }
-    label, p {
-      font-size: 18px;
+    .card h2 {
+      color: #0af;
+    }
+    .card p {
+      font-size: 16px;
       margin: 8px 0;
     }
-    input[type="checkbox"] {
-      transform: scale(1.2);
-      margin-right: 10px;
+    .card form {
+      margin-top: 15px;
     }
-    .price {
-      color: #0f0;
+    .card input, .card textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .card button {
+      background-color: #0af;
+      color: #000;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
       font-weight: bold;
     }
     footer {
@@ -50,26 +72,56 @@
 
   <header>
     <h1>S4AHA Detailing</h1>
-    <p>Profesionalno poliranje i detailing vozila</p>
+    <p>Odaberi paket i rezerviši svoju uslugu</p>
   </header>
 
-  <div class="section">
-    <h2>Poliranje farova</h2>
-    <p>Cijena: <span class="price">40 KM</span></p>
-    <label><input type="checkbox" /> Polimerizacija (+10 KM)</label>
-  </div>
+  <div class="packages">
 
-  <div class="section">
-    <h2>Paket ponude</h2>
-    <p><strong>Lite paket:</strong> Jednoslojno poliranje automobila</p>
-    <p><strong>Normal paket:</strong> Usisavanje + dvoslojno poliranje automobila</p>
-    <p><strong>Full paket:</strong> Troslojno poliranje + detailing unutrašnjosti</p>
-  </div>
+    <!-- Lite Paket -->
+    <div class="card">
+      <h2>Lite Paket</h2>
+      <p>Jednoslojno poliranje automobila</p>
+      <p><strong>Cijena:</strong> 50 KM</p>
+      <form action="https://formsubmit.co/sahinovicasin@gmail.com" method="POST">
+        <input type="hidden" name="Paket" value="Lite Paket">
+        <input type="text" name="ImePrezime" placeholder="Ime i prezime" required>
+        <input type="text" name="Telefon" placeholder="Broj telefona" required>
+        <input type="text" name="Grad" placeholder="Odakle ste?" required>
+        <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
+        <button type="submit">Rezerviši</button>
+      </form>
+    </div>
 
-  <div class="section">
-    <h2>Kontakt</h2>
-    <p>Za rezervacije i više informacija: <br>
-    Pošaljite poruku putem Instagrama, Facebooka ili direktno pozivom.</p>
+    <!-- Normal Paket -->
+    <div class="card">
+      <h2>Normal Paket</h2>
+      <p>Usisavanje + dvoslojno poliranje automobila</p>
+      <p><strong>Cijena:</strong> 70 KM</p>
+      <form action="https://formsubmit.co/sahinovicasin@gmail.com" method="POST">
+        <input type="hidden" name="Paket" value="Normal Paket">
+        <input type="text" name="ImePrezime" placeholder="Ime i prezime" required>
+        <input type="text" name="Telefon" placeholder="Broj telefona" required>
+        <input type="text" name="Grad" placeholder="Odakle ste?" required>
+        <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
+        <button type="submit">Rezerviši</button>
+      </form>
+    </div>
+
+    <!-- Full Paket -->
+    <div class="card">
+      <h2>Full Paket</h2>
+      <p>Troslojno poliranje + detailing unutrašnjosti</p>
+      <p><strong>Cijena:</strong> 100 KM</p>
+      <form action="https://formsubmit.co/sahinovicasin@gmail.com" method="POST">
+        <input type="hidden" name="Paket" value="Full Paket">
+        <input type="text" name="ImePrezime" placeholder="Ime i prezime" required>
+        <input type="text" name="Telefon" placeholder="Broj telefona" required>
+        <input type="text" name="Grad" placeholder="Odakle ste?" required>
+        <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
+        <button type="submit">Rezerviši</button>
+      </form>
+    </div>
+
   </div>
 
   <footer>
