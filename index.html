@@ -1,197 +1,198 @@
 <!DOCTYPE html>
 <html lang="bs">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S4aha Detailing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1a1a1a, #333);
-      color: #fff;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
     }
+
+    body {
+      background: linear-gradient(to right, #1c1c1c, #2e2e2e);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
     h1 {
-      margin-top: 30px;
+      font-size: 3em;
+      margin-bottom: 30px;
+      color: #f5f5f5;
+      animation: fadeIn 1s ease-in;
     }
-    .menu {
-      margin-top: 50px;
-    }
-    .menu button {
-      display: block;
-      width: 200px;
-      padding: 15px;
-      margin: 10px auto;
+
+    .options button {
       background-color: #444;
+      color: #fff;
+      padding: 15px 30px;
+      margin: 15px 0;
       border: none;
-      color: white;
-      font-size: 18px;
+      border-radius: 12px;
       cursor: pointer;
-      border-radius: 8px;
+      font-size: 1.3em;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
     }
-    .menu button:hover {
+
+    .options button:hover {
       background-color: #666;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      transform: scale(1.05);
     }
-    .paketi, .informacije {
+
+    .packages, .info-tab {
       display: none;
-      flex-direction: column;
-      align-items: center;
       margin-top: 30px;
-      width: 90%;
+      animation: fadeIn 0.8s ease;
     }
-    .paket-box {
-      background-color: #222;
+
+    .package {
+      background-color: #333;
       padding: 20px;
-      margin: 15px;
-      border-radius: 10px;
-      width: 100%;
+      margin: 15px auto;
+      border-radius: 12px;
+      width: 90%;
       max-width: 500px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+      transition: transform 0.3s ease;
     }
-    .paket-box:hover {
+
+    .package:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
-    .rezervisi-btn {
-      background-color: #009688;
-      color: white;
-      border: none;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .rezervisi-btn:hover {
-      background-color: #00796b;
-    }
-    .modal {
+
+    .form-popup {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #222;
+      padding: 25px;
+      border-radius: 12px;
+      z-index: 999;
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
     }
-    .modal-content {
-      background-color: #fff;
-      color: #000;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 400px;
+
+    input, textarea {
       width: 100%;
-      animation: fadeIn 0.4s;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
     }
+
+    .stickers {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      animation: sparkle 2s infinite;
+    }
+
+    .stickers i {
+      font-size: 1.8em;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    label, input, textarea {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .close-btn {
-      margin-top: 10px;
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .kontakt-ikonice img {
-      width: 40px;
-      margin: 10px;
+
+    @keyframes sparkle {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
     }
   </style>
 </head>
+
 <body>
   <h1>S4aha Detailing</h1>
-  <div class="menu">
-    <button onclick="showSection('paketi')">Paketi</button>
-    <button onclick="showSection('informacije')">Informacije</button>
+
+  <div class="options">
+    <button onclick="showSection('packages')">Paketi</button>
+    <button onclick="showSection('info')">Informacije</button>
     <button onclick="window.location.href='about:blank'">Izlaz</button>
   </div>
 
-  <div id="paketi" class="paketi">
-    <div class="paket-box">
-      <h3>Poliranje farova – <span id="farovi-cijena">50 KM</span></h3>
+  <div class="packages" id="packages">
+    <div class="package">
+      <h2>Poliranje farova - 50 KM</h2>
       <label><input type="checkbox" id="keramicka" onchange="updateFaroviCijena()"> Keramička zaštita (+10 KM)</label>
-      <button class="rezervisi-btn" onclick="openModal('Poliranje farova')">Rezerviši</button>
+      <p id="cijenaFarova">Cijena: 50 KM</p>
+      <button onclick="openForm('Farovi')">Rezerviši</button>
     </div>
-    <div class="paket-box">
-      <h3>Light paket – 180 KM</h3>
-      <p>Jednoslojno poliranje automobila</p>
-      <button class="rezervisi-btn" onclick="openModal('Light paket')">Rezerviši</button>
+    <div class="package">
+      <h2>Light Paket - Jednoslojno poliranje - 180 KM</h2>
+      <button onclick="openForm('Light Paket')">Rezerviši</button>
     </div>
-    <div class="paket-box">
-      <h3>Normal paket – 250 KM</h3>
-      <p>Dvoslojno poliranje + usisavanje</p>
-      <button class="rezervisi-btn" onclick="openModal('Normal paket')">Rezerviši</button>
+    <div class="package">
+      <h2>Normal Paket - Dvoslojno + usisavanje - 250 KM</h2>
+      <button onclick="openForm('Normal Paket')">Rezerviši</button>
     </div>
-    <div class="paket-box">
-      <h3>Full paket – 320 KM</h3>
-      <p>Troslojno poliranje + full detailing</p>
-      <button class="rezervisi-btn" onclick="openModal('Full paket')">Rezerviši</button>
+    <div class="package">
+      <h2>Full Paket - Troslojno + detailing - 320 KM</h2>
+      <button onclick="openForm('Full Paket')">Rezerviši</button>
     </div>
   </div>
 
-  <div id="informacije" class="informacije">
-    <h3>Adin Šahinović</h3>
-    <p>Telefon: 061 374 815</p>
+  <div class="info-tab" id="info">
+    <h2>Informacije</h2>
+    <p>Ime i Prezime: Adin Šahinović</p>
+    <p>Broj Telefona: 061374815</p>
     <p>Adresa: Konjic 88400, Radešine.bb</p>
-    <div class="kontakt-ikonice">
-      <a href="viber://chat?number=+38761374815"><img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" alt="Viber"></a>
-      <a href="https://wa.me/38761374815"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-    </div>
+    <a href="viber://chat?number=+38761374815"><i class="fab fa-viber"></i> Viber</a>
+    <br>
+    <a href="https://wa.me/38761374815"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   </div>
 
-  <div id="rezervacija-modal" class="modal">
-    <div class="modal-content">
-      <form action="https://formspree.io/f/mwkgyjyo" method="POST">
-        <input type="hidden" name="paket" id="paket-ime">
-        <label>Ime i Prezime</label>
-        <input type="text" name="ime" required>
-        <label>Broj Telefona</label>
-        <input type="tel" name="telefon" required>
-        <label>Adresa</label>
-        <input type="text" name="adresa">
-        <label>Pitanje (opcionalno)</label>
-        <textarea name="pitanje"></textarea>
-        <button type="submit" class="rezervisi-btn">Rezerviši</button>
-        <button type="button" class="close-btn" onclick="closeModal()">Zatvori</button>
-      </form>
-    </div>
+  <div class="form-popup" id="form">
+    <form action="https://formsubmit.co/sahinovicasin@gmail.com" method="POST">
+      <input type="hidden" name="_subject" id="form-subject" value="Rezervacija">
+      <input type="text" name="Ime i Prezime" placeholder="Ime i Prezime" required>
+      <input type="tel" name="Broj Telefona" placeholder="Broj Telefona" required>
+      <input type="text" name="Adresa" placeholder="Adresa" required>
+      <textarea name="Pitanje" placeholder="Dodatna pitanja..."></textarea>
+      <button type="submit">Rezerviši</button>
+    </form>
+  </div>
+
+  <div class="stickers">
+    <i class="fas fa-car"></i>
+    <i class="fas fa-broom"></i>
+    <i class="fas fa-spray-can"></i>
   </div>
 
   <script>
     function showSection(id) {
-      document.getElementById('paketi').style.display = 'none';
-      document.getElementById('informacije').style.display = 'none';
-      document.getElementById(id).style.display = 'flex';
+      document.getElementById('packages').style.display = 'none';
+      document.getElementById('info').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
     }
 
     function updateFaroviCijena() {
-      const chk = document.getElementById('keramicka');
-      document.getElementById('farovi-cijena').textContent = chk.checked ? '60 KM' : '50 KM';
+      const keramicka = document.getElementById('keramicka').checked;
+      const cijena = keramicka ? '60 KM' : '50 KM';
+      document.getElementById('cijenaFarova').innerText = 'Cijena: ' + cijena;
     }
 
-    function openModal(paket) {
-      document.getElementById('rezervacija-modal').style.display = 'flex';
-      document.getElementById('paket-ime').value = paket;
-    }
-
-    function closeModal() {
-      document.getElementById('rezervacija-modal').style.display = 'none';
+    function openForm(paket) {
+      document.getElementById('form').style.display = 'block';
+      document.getElementById('form-subject').value = 'Rezervacija - ' + paket;
     }
   </script>
 </body>
+
 </html>
