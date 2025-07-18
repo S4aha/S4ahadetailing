@@ -6,166 +6,187 @@
   <title>S4aha Detailing</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: #fff;
       margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     h1 {
-      color: #f2aa4c;
-      margin-bottom: 30px;
-    }
-    .menu-btn {
-      background-color: #f2aa4c;
-      color: black;
-      padding: 15px;
-      margin: 10px auto;
-      width: 220px;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(242, 170, 76, 0.7);
-    }
-    .menu-btn:hover {
-      background-color: #d18d3b;
-    }
-    .section {
-      display: none;
       margin-top: 30px;
     }
-    .paket-box {
-      background: rgba(255, 255, 255, 0.1);
-      margin: 15px auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    .menu {
+      margin-top: 50px;
     }
-    .checkbox-label {
+    .menu button {
       display: block;
-      margin-top: 10px;
+      width: 200px;
+      padding: 15px;
+      margin: 10px auto;
+      background-color: #444;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .menu button:hover {
+      background-color: #666;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+    .paketi, .informacije {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      width: 90%;
+    }
+    .paket-box {
+      background-color: #222;
+      padding: 20px;
+      margin: 15px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .paket-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
     .rezervisi-btn {
-      background-color: #4CAF50;
+      background-color: #009688;
       color: white;
-      padding: 10px;
       border: none;
-      border-radius: 6px;
+      padding: 10px;
       margin-top: 10px;
+      border-radius: 5px;
       cursor: pointer;
+    }
+    .rezervisi-btn:hover {
+      background-color: #00796b;
     }
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
+      background-color: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
-      z-index: 9999;
+      z-index: 1000;
     }
     .modal-content {
-      background: white;
-      color: black;
+      background-color: #fff;
+      color: #000;
       padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-    }
-    .modal input, .modal textarea {
+      border-radius: 8px;
+      max-width: 400px;
       width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      animation: fadeIn 0.4s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
     }
     .close-btn {
-      float: right;
-      cursor: pointer;
-      color: red;
+      margin-top: 10px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
     }
-    a img {
+    .kontakt-ikonice img {
+      width: 40px;
       margin: 10px;
     }
   </style>
 </head>
 <body>
   <h1>S4aha Detailing</h1>
-  <button class="menu-btn" onclick="showSection('paketi')">Paketi</button>
-  <button class="menu-btn" onclick="showSection('info')">Informacije</button>
-  <button class="menu-btn" onclick="window.location.href='about:blank'">Izlaz</button>
+  <div class="menu">
+    <button onclick="showSection('paketi')">Paketi</button>
+    <button onclick="showSection('informacije')">Informacije</button>
+    <button onclick="window.location.href='about:blank'">Izlaz</button>
+  </div>
 
-  <div id="paketi" class="section">
+  <div id="paketi" class="paketi">
     <div class="paket-box">
-      <h3>Poliranje farova - <span id="farovi-cijena">40 KM</span></h3>
-      <label class="checkbox-label">
-        <input type="checkbox" id="keramicka" onchange="updateFaroviCijena()"> Keramička zaštita (+10 KM)
-      </label>
+      <h3>Poliranje farova – <span id="farovi-cijena">50 KM</span></h3>
+      <label><input type="checkbox" id="keramicka" onchange="updateFaroviCijena()"> Keramička zaštita (+10 KM)</label>
       <button class="rezervisi-btn" onclick="openModal('Poliranje farova')">Rezerviši</button>
     </div>
-
     <div class="paket-box">
-      <h3>Light paket - 120 KM</h3>
+      <h3>Light paket – 180 KM</h3>
       <p>Jednoslojno poliranje automobila</p>
       <button class="rezervisi-btn" onclick="openModal('Light paket')">Rezerviši</button>
     </div>
-
     <div class="paket-box">
-      <h3>Normal paket - 200 KM</h3>
-      <p>Dvoslojno poliranje + usisavanje unutrašnjosti</p>
+      <h3>Normal paket – 250 KM</h3>
+      <p>Dvoslojno poliranje + usisavanje</p>
       <button class="rezervisi-btn" onclick="openModal('Normal paket')">Rezerviši</button>
     </div>
-
     <div class="paket-box">
-      <h3>Full paket - 240 KM</h3>
-      <p>Troslojno poliranje + full detailing unutrašnjosti</p>
+      <h3>Full paket – 320 KM</h3>
+      <p>Troslojno poliranje + full detailing</p>
       <button class="rezervisi-btn" onclick="openModal('Full paket')">Rezerviši</button>
     </div>
   </div>
 
-  <div id="info" class="section">
-    <h2>Kontakt informacije</h2>
-    <p><strong>Ime i Prezime:</strong> Adin Šahinović</p>
-    <p><strong>Telefon:</strong> <a href="tel:+38761374815">061 374 815</a></p>
-    <p><strong>Adresa:</strong> Konjic 88400, Radešine bb</p>
-    <a href="viber://chat?number=%2B38761374815"><img src="https://cdn-icons-png.flaticon.com/512/145/145812.png" width="40" alt="Viber"></a>
-    <a href="https://wa.me/38761374815"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" alt="WhatsApp"></a>
+  <div id="informacije" class="informacije">
+    <h3>Adin Šahinović</h3>
+    <p>Telefon: 061 374 815</p>
+    <p>Adresa: Konjic 88400, Radešine.bb</p>
+    <div class="kontakt-ikonice">
+      <a href="viber://chat?number=+38761374815"><img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" alt="Viber"></a>
+      <a href="https://wa.me/38761374815"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+    </div>
   </div>
 
-  <div class="modal" id="rezervacija-modal">
+  <div id="rezervacija-modal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h3>Rezervacija - <span id="odabrani-paket"></span></h3>
-      <form action="https://formsubmit.co/Sahinovicasin@gmail.com" method="POST">
-        <input type="hidden" name="Paket" id="paket-input">
-        <input type="text" name="Ime i Prezime" placeholder="Ime i Prezime" required>
-        <input type="tel" name="Telefon" placeholder="Broj telefona" required>
-        <input type="text" name="Adresa" placeholder="Adresa" required>
-        <textarea name="Pitanje" placeholder="Dodatna pitanja (opcionalno)"></textarea>
-        <button class="rezervisi-btn" type="submit">Rezerviši</button>
+      <form action="https://formspree.io/f/mwkgyjyo" method="POST">
+        <input type="hidden" name="paket" id="paket-ime">
+        <label>Ime i Prezime</label>
+        <input type="text" name="ime" required>
+        <label>Broj Telefona</label>
+        <input type="tel" name="telefon" required>
+        <label>Adresa</label>
+        <input type="text" name="adresa">
+        <label>Pitanje (opcionalno)</label>
+        <textarea name="pitanje"></textarea>
+        <button type="submit" class="rezervisi-btn">Rezerviši</button>
+        <button type="button" class="close-btn" onclick="closeModal()">Zatvori</button>
       </form>
     </div>
   </div>
 
   <script>
     function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
+      document.getElementById('paketi').style.display = 'none';
+      document.getElementById('informacije').style.display = 'none';
+      document.getElementById(id).style.display = 'flex';
     }
 
     function updateFaroviCijena() {
-      const checkbox = document.getElementById('keramicka');
-      const cijena = document.getElementById('farovi-cijena');
-      cijena.textContent = checkbox.checked ? '50 KM' : '40 KM';
+      const chk = document.getElementById('keramicka');
+      document.getElementById('farovi-cijena').textContent = chk.checked ? '60 KM' : '50 KM';
     }
 
     function openModal(paket) {
       document.getElementById('rezervacija-modal').style.display = 'flex';
-      document.getElementById('odabrani-paket').textContent = paket;
-      document.getElementById('paket-input').value = paket;
+      document.getElementById('paket-ime').value = paket;
     }
 
     function closeModal() {
