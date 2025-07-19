@@ -1,46 +1,302 @@
+@@ -1,170 +1,188 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="bs">
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S4aha Detailing</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    @keyframes backgroundGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+      background-size: 600% 600%;
+      animation: backgroundGlow 15s ease infinite;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+      overflow-x: hidden;
+      animation: backgroundGlow 10s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    @keyframes backgroundGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .option-btn {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: transform 0.3s, background-color 0.3s;
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      color: #00ffff;
+      margin-top: 30px;
+    }
+
+    .option-btn:hover {
+      background-color: #00acc1;
+      transform: scale(1.05);
+    .option-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      gap: 20px;
+    }
+
+    .package {
+    .option {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      animation: fadeIn 1s ease;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    .option:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
+
+    .icon-bar {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      left: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .icon-bar img {
+      display: block;
+      margin: 10px 0;
+      width: 40px;
+      filter: drop-shadow(0 0 10px cyan);
+      height: 40px;
+      filter: drop-shadow(0 0 5px cyan);
+    }
+
+    .button {
+      background: #00ffff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
-  <header>
-    <img src="images/logo.png" alt="S4aha Detailing Logo" class="logo" />
-    <h1>S4aha Detailing</h1>
-  </header>
+  <h1>S4aha Detailing</h1>
 
-  <section class="packages">
-    <h2>Paketi</h2>
-    <div class="package">
-      <h3>Poliranje farova – <span id="farovi-cijena">40 KM</span></h3>
-      <label><input type="checkbox" id="keramicka-farovi" /> Keramička zaštita (+10 KM)</label>
-    </div>
-    <div class="package">
-      <h3>Normal paket – <span id="normal-cijena">80 KM</span></h3>
-      <label><input type="checkbox" id="keramicka-normal" /> Keramička zaštita (+20 KM)</label>
-    </div>
-    <div class="package">
-      <h3>Full paket – <span id="full-cijena">180 KM</span></h3>
-      <label><input type="checkbox" id="keramicka-full" /> Keramička zaštita (+20 KM)</label>
-    </div>
-  </section>
+  <button class="option-btn" onclick="showSection('packages')">Paketi</button>
+  <button class="option-btn" onclick="showSection('info')">Informacije</button>
+  <button class="option-btn" onclick="exitTab()">Izlaz</button>
 
-  <button id="rezervisiBtn">Rezerviši</button>
+  <div id="packages" style="display:none;">
+    <div class="package">
+      <h2>Poliranje farova - 50 KM</h2>
+      <label>
+        <input type="checkbox" id="keramicka" onchange="toggleKeramicka()"> Keramička zaštita (+10 KM)
+      </label>
+      <p id="farovi-cijena">Cijena: 50 KM</p>
+      <button class="option-btn" onclick="openForm('Poliranje farova')">Rezerviši</button>
+    </div>
+  <div class="icon-bar">
+    <img src="https://img.icons8.com/ios-filled/50/car.png" alt="Auto">
+    <img src="https://img.icons8.com/ios-filled/50/vacuum-cleaner.png" alt="Usisivač">
+    <img src="https://img.icons8.com/ios-filled/50/spray.png" alt="Sprej">
+  </div>
 
-  <div id="rezervacija-popup" class="popup">
-    <form class="popup-form">
-      <h2>Rezervacija</h2>
-      <input type="text" placeholder="Ime i prezime" required />
-      <input type="tel" placeholder="Broj telefona" required />
-      <input type="text" placeholder="Grad" required />
-      <textarea placeholder="Poruka" required></textarea>
-      <button type="submit">Rezerviši</button>
+    <div class="package">
+      <h2>Light Paket</h2>
+      <p>Jednoslojno poliranje automobila - 180 KM</p>
+      <button class="option-btn" onclick="openForm('Light paket')">Rezerviši</button>
+    </div>
+  <div class="option-container">
+    <div class="option" onclick="showPackages()">Paketi</div>
+    <div class="option" onclick="showInfo()">Informacije</div>
+    <div class="option" onclick="window.location.href='https://google.com'">Izlaz</div>
+  </div>
+
+    <div class="package">
+      <h2>Normal Paket</h2>
+      <p>Dvoslojno poliranje i usisavanje - 250 KM</p>
+      <button class="option-btn" onclick="openForm('Normal paket')">Rezerviši</button>
+  <div id="packages" class="option-container hidden">
+    <div class="option">
+      <p>Poliranje farova - 50 KM</p>
+      <label><input type="checkbox" id="keramicka" onchange="updateFarovi()"> Keramička zaštita (+10 KM)</label>
+      <p id="faroviCijena">Cijena: 50 KM</p>
+      <button class="button" onclick="openForm('Farovi')">Rezerviši</button>
+    </div>
+
+    <div class="package">
+      <h2>Full Paket</h2>
+      <p>Troslojno poliranje i full detailing - 320 KM</p>
+      <button class="option-btn" onclick="openForm('Full paket')">Rezerviši</button>
+    <div class="option">
+      <p>Light paket - Jednoslojno poliranje automobila</p>
+      <p>Cijena: 180 KM</p>
+      <button class="button" onclick="openForm('Light')">Rezerviši</button>
+    </div>
+    <div class="option">
+      <p>Normal paket - Dvoslojno poliranje + usisavanje</p>
+      <p>Cijena: 250 KM</p>
+      <button class="button" onclick="openForm('Normal')">Rezerviši</button>
+    </div>
+    <div class="option">
+      <p>Full paket - Troslojno poliranje + detailing</p>
+      <p>Cijena: 320 KM</p>
+      <button class="button" onclick="openForm('Full')">Rezerviši</button>
+    </div>
+  </div>
+
+  <div id="info" style="display:none;">
+    <div class="package">
+      <h2>Kontakt informacije</h2>
+      <p>Adin Šahinović</p>
+      <p>Broj: 061 374 815</p>
+      <p>Adresa: Konjic, Radešine.bb 88400</p>
+      <a href="viber://chat?number=+38761374815"><img src="https://img.icons8.com/color/48/000000/viber.png"/></a>
+      <a href="https://wa.me/38761374815"><img src="https://img.icons8.com/color/48/000000/whatsapp.png"/></a>
+  <div id="info" class="option-container hidden">
+    <div class="option">
+      <p><strong>Ime i Prezime:</strong> Adin Šahinović</p>
+      <p><strong>Telefon:</strong> 061374815</p>
+      <p><strong>Adresa:</strong> Radešine.bb, Konjic 88400</p>
+      <p>
+        <a href="viber://chat?number=+38761374815">Viber</a> |
+        <a href="https://wa.me/38761374815">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="form-popup" style="display:none;">
+    <form action="https://formsubmit.co/Sahinovicasin@gmail.com" method="POST" class="package">
+      <input type="hidden" name="_next" value="https://s4aha.github.io/S4ahadetailing/thankyou.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" id="selectedPackage" name="Paket">
+      <input type="text" name="Ime i Prezime" placeholder="Ime i Prezime" required><br><br>
+      <input type="tel" name="Telefon" placeholder="Broj telefona" required><br><br>
+      <input type="text" name="Adresa" placeholder="Adresa"><br><br>
+      <textarea name="Poruka" placeholder="Pitanja ili napomena..."></textarea><br><br>
+      <button class="option-btn" type="submit">Rezerviši</button>
+  <div id="form-popup" class="option-container hidden">
+    <form action="https://formsubmit.co/Sahinovicasin@gmail.com" method="POST" class="option">
+      <input type="hidden" name="Paket" id="paketInput" />
+      <input type="text" name="Ime i prezime" placeholder="Ime i Prezime" required><br><br>
+      <input type="text" name="Broj telefona" placeholder="Broj telefona" required><br><br>
+      <input type="text" name="Adresa" placeholder="Adresa" required><br><br>
+      <textarea name="Poruka" placeholder="Dodatna pitanja..." rows="4"></textarea><br><br>
+      <button class="button" type="submit">Rezerviši</button>
     </form>
   </div>
 
-  <script src="script.js"></script>
+  <div class="icon-bar">
+    <img src="https://img.icons8.com/fluency/48/car-cleaning.png" alt="Polirka">
+    <img src="https://img.icons8.com/fluency/48/vacuum-cleaner.png" alt="Usisivač">
+    <img src="https://img.icons8.com/fluency/48/spray.png" alt="Sprej">
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.getElementById('packages').style.display = 'none';
+      document.getElementById('info').style.display = 'none';
+      document.getElementById('form-popup').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
+    function showPackages() {
+      document.getElementById("packages").classList.remove("hidden");
+      document.getElementById("info").classList.add("hidden");
+      document.getElementById("form-popup").classList.add("hidden");
+    }
+
+    function openForm(paket) {
+      document.getElementById('form-popup').style.display = 'block';
+      document.getElementById('selectedPackage').value = paket;
+    function showInfo() {
+      document.getElementById("packages").classList.add("hidden");
+      document.getElementById("info").classList.remove("hidden");
+      document.getElementById("form-popup").classList.add("hidden");
+    }
+
+    function exitTab() {
+      window.location.href = 'https://www.google.com';
+    function openForm(paket) {
+      document.getElementById("packages").classList.add("hidden");
+      document.getElementById("info").classList.add("hidden");
+      document.getElementById("form-popup").classList.remove("hidden");
+      document.getElementById("paketInput").value = paket;
+    }
+
+    function toggleKeramicka() {
+      const checkbox = document.getElementById('keramicka');
+      const cijena = document.getElementById('farovi-cijena');
+      cijena.innerText = checkbox.checked ? "Cijena: 60 KM" : "Cijena: 50 KM";
+    function updateFarovi() {
+      const keramicka = document.getElementById("keramicka").checked;
+      document.getElementById("faroviCijena").innerText = keramicka ? "Cijena: 60 KM" : "Cijena: 50 KM";
+    }
+  </script>
 </body>
+
 </html>
