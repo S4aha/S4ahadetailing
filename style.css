@@ -1,0 +1,50 @@
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  text-align: center;
+  padding: 20px;
+}
+.logo {
+  width: 120px;
+}
+.packages {
+  padding: 20px;
+}
+.package {
+  margin-bottom: 20px;
+}
+button {
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 20px;
+  cursor: pointer;
+}
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+.popup-form {
+  background: #222;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-form input, .popup-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  width: 250px;
+}
