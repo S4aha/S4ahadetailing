@@ -1,232 +1,188 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>S4AHA Detailing - Profesionalno poliranje</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S4aha Detailing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0; padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #eee;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+      overflow-x: hidden;
+      animation: backgroundGlow 10s ease-in-out infinite;
     }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      max-width: 1200px;
-      width: 100%;
-      justify-content: center;
+
+    @keyframes backgroundGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
-    .box {
-      background: #222;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #0af;
-      padding: 20px;
-      flex: 1 1 300px;
-      min-width: 280px;
-      color: #ddd;
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      color: #00ffff;
+      margin-top: 30px;
+    }
+
+    .option-container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 40px;
+      gap: 20px;
     }
-    .box h2 {
-      color: #0af;
-      margin-bottom: 20px;
+
+    .option {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
       text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease;
     }
-    /* PONUDA unutrašnje kocke /
-    .offer-list {
+
+    .option:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
+
+    .icon-bar {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       gap: 15px;
-      width: 100%;
-    }
-    .offer-item {
-      background: #111;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 8px #06f5;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-    }
-    .offer-item h3 {
-      margin: 0 0 5px 0;
-      color: #0af;
-    }
-    .offer-item p {
-      margin: 4px 0;
-    }
-    .offer-item button {
-      position: absolute;
-      right: 15px;
-      bottom: 15px;
-      background: #0af;
-      border: none;
-      color: #000;
-      font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .offer-item button:hover {
-      background: #05c;
-    }
-    / Forma u ponudi */
-    .form-popup {
-      display: none;
-      margin-top: 10px;
-      background: #222;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #08f;
-      width: 100%;
-      color: #eee;
-      z-index: 10;
-    }
-    .form-popup input, .form-popup textarea {
-      width: 100%;
-      margin: 8px 0;
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      font-size: 15px;
-    }
-    .form-popup button.submit-btn {
-      background: #0af;
-      border: none;
       padding: 10px;
-      width: 100%;
+    }
+
+    .icon-bar img {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 0 5px cyan);
+    }
+
+    .button {
+      background: #00ffff;
       color: #000;
-      font-weight: bold;
-      border-radius: 7px;
-      cursor: pointer;
+      border: none;
+      padding: 10px 20px;
       margin-top: 10px;
-      transition: background 0.3s ease;
-    }
-    .form-popup button.submit-btn:hover {
-      background: #05c;
-    }
-    .close-btn {
-      background: #f33;
-      border: none;
-      color: #fff;
-      font-weight: bold;
-      border-radius: 7px;
-      padding: 5px 10px;
+      border-radius: 5px;
       cursor: pointer;
-      position: absolute;
-      right: 15px;
-      top: 15px;
-    }
-
-    /* INFORMACIJE box */
-    .info-content p {
-      margin: 8px 0;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    /* IZLAZ dugme */
-    .exit-btn {
-      margin-top: auto;
-      background: #f33;
-      border: none;
-      color: white;
       font-weight: bold;
-      padding: 15px 25px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background 0.3s ease;
-    }
-    .exit-btn:hover {
-      background: #b22;
     }
 
-    /* Responsive */
-    @media(max-width: 900px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
+
 <body>
+  <h1>S4aha Detailing</h1>
 
-  <div class="container">
+  <div class="icon-bar">
+    <img src="https://img.icons8.com/ios-filled/50/car.png" alt="Auto">
+    <img src="https://img.icons8.com/ios-filled/50/vacuum-cleaner.png" alt="Usisivač">
+    <img src="https://img.icons8.com/ios-filled/50/spray.png" alt="Sprej">
+  </div>
 
-    <!-- PONUDA -->
-    <div class="box" id="offers">
-      <h2>Ponude</h2>
+  <div class="option-container">
+    <div class="option" onclick="showPackages()">Paketi</div>
+    <div class="option" onclick="showInfo()">Informacije</div>
+    <div class="option" onclick="window.location.href='https://google.com'">Izlaz</div>
+  </div>
 
-      <div class="offer-list">
+  <div id="packages" class="option-container hidden">
+    <div class="option">
+      <p>Poliranje farova - 50 KM</p>
+      <label><input type="checkbox" id="keramicka" onchange="updateFarovi()"> Keramička zaštita (+10 KM)</label>
+      <p id="faroviCijena">Cijena: 50 KM</p>
+      <button class="button" onclick="openForm('Farovi')">Rezerviši</button>
+    </div>
+    <div class="option">
+      <p>Light paket - Jednoslojno poliranje automobila</p>
+      <p>Cijena: 180 KM</p>
+      <button class="button" onclick="openForm('Light')">Rezerviši</button>
+    </div>
+    <div class="option">
+      <p>Normal paket - Dvoslojno poliranje + usisavanje</p>
+      <p>Cijena: 250 KM</p>
+      <button class="button" onclick="openForm('Normal')">Rezerviši</button>
+    </div>
+    <div class="option">
+      <p>Full paket - Troslojno poliranje + detailing</p>
+      <p>Cijena: 320 KM</p>
+      <button class="button" onclick="openForm('Full')">Rezerviši</button>
+    </div>
+  </div>
 
-        <div class="offer-item" data-package="Poliranje farova (40 KM)">
-          <h3>Poliranje farova</h3>
-          <p>Cijena: 40 KM</p>
-          <button class="open-form-btn">Rezerviši</button>
+  <div id="info" class="option-container hidden">
+    <div class="option">
+      <p><strong>Ime i Prezime:</strong> Adin Šahinović</p>
+      <p><strong>Telefon:</strong> 061374815</p>
+      <p><strong>Adresa:</strong> Radešine.bb, Konjic 88400</p>
+      <p>
+        <a href="viber://chat?number=+38761374815">Viber</a> |
+        <a href="https://wa.me/38761374815">WhatsApp</a>
+      </p>
+    </div>
+  </div>
 
-          <form class="form-popup" method="POST" action="https://formsubmit.co/sahinovicasin@gmail.com">
-            <input type="hidden" name="Paket" value="Poliranje farova">
-            <input type="text" name="ImePrezime" placeholder="Ime i prezime" required />
-            <input type="text" name="Telefon" placeholder="Broj telefona" required />
-            <input type="text" name="Grad" placeholder="Odakle ste?" required />
-            <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
-            <button type="submit" class="submit-btn">Pošalji rezervaciju</button>
-            <button type="button" class="close-btn">×</button>
-          </form>
-        </div>
+  <div id="form-popup" class="option-container hidden">
+    <form action="https://formsubmit.co/Sahinovicasin@gmail.com" method="POST" class="option">
+      <input type="hidden" name="Paket" id="paketInput" />
+      <input type="text" name="Ime i prezime" placeholder="Ime i Prezime" required><br><br>
+      <input type="text" name="Broj telefona" placeholder="Broj telefona" required><br><br>
+      <input type="text" name="Adresa" placeholder="Adresa" required><br><br>
+      <textarea name="Poruka" placeholder="Dodatna pitanja..." rows="4"></textarea><br><br>
+      <button class="button" type="submit">Rezerviši</button>
+    </form>
+  </div>
 
-        <div class="offer-item" data-package="Light paket (50 KM)">
-          <h3>Light paket</h3>
-          <p>Jednoslojno poliranje automobila</p>
-          <p>Cijena: 50 KM</p>
-          <button class="open-form-btn">Rezerviši</button>
+  <script>
+    function showPackages() {
+      document.getElementById("packages").classList.remove("hidden");
+      document.getElementById("info").classList.add("hidden");
+      document.getElementById("form-popup").classList.add("hidden");
+    }
 
-          <form class="form-popup" method="POST" action="https://formsubmit.co/sahinovicasin@gmail.com">
-            <input type="hidden" name="Paket" value="Light paket">
-            <input type="text" name="ImePrezime" placeholder="Ime i prezime" required />
-            <input type="text" name="Telefon" placeholder="Broj telefona" required />
-            <input type="text" name="Grad" placeholder="Odakle ste?" required />
-            <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
-            <button type="submit" class="submit-btn">Pošalji rezervaciju</button>
-            <button type="button" class="close-btn">×</button>
-          </form>
-        </div>
+    function showInfo() {
+      document.getElementById("packages").classList.add("hidden");
+      document.getElementById("info").classList.remove("hidden");
+      document.getElementById("form-popup").classList.add("hidden");
+    }
 
-        <div class="offer-item" data-package="Normal paket (70 KM)">
-          <h3>Normal paket</h3>
-          <p>Usisavanje + dvoslojno poliranje automobila</p>
-          <p>Cijena: 70 KM</p>
-          <button class="open-form-btn">Rezerviši</button>
+    function openForm(paket) {
+      document.getElementById("packages").classList.add("hidden");
+      document.getElementById("info").classList.add("hidden");
+      document.getElementById("form-popup").classList.remove("hidden");
+      document.getElementById("paketInput").value = paket;
+    }
 
-          <form class="form-popup" method="POST" action="https://formsubmit.co/sahinovicasin@gmail.com">
-            <input type="hidden" name="Paket" value="Normal paket">
-            <input type="text" name="ImePrezime" placeholder="Ime i prezime" required />
-            <input type="text" name="Telefon" placeholder="Broj telefona" required />
-            <input type="text" name="Grad" placeholder="Odakle ste?" required />
-            <textarea name="Poruka" placeholder="Dodatna poruka (opcionalno)" rows="3"></textarea>
-            <button type="submit" class="submit-btn">Pošalji rezervaciju</button>
-            <button type="button" class="close-btn">×</button>
-          </form>
-        </div>
+    function updateFarovi() {
+      const keramicka = document.getElementById("keramicka").checked;
+      document.getElementById("faroviCijena").innerText = keramicka ? "Cijena: 60 KM" : "Cijena: 50 KM";
+    }
+  </script>
+</body>
 
-        <div class="offer-item" data-package="Full paket (100 KM)">
-          <h3>Full paket</h3>
-          <p>Troslojno poliranje + detailing unutrašnjosti</p>
-          <p>Cijena: 100 KM</p>
-          <button class="open-form-btn">Rezerviši</button>
-
-          <form class="form-popup" method="POST" action="https://formsubmit.co/sahinovicasin@gmail.com">
-            <input type="hidden" name="Paket" value="Full paket">
-            <input type="text" name="ImePrezime" placeholder="Ime i prezime" required />
-            <input type="text" name="Telefon" placehol
+</html>
